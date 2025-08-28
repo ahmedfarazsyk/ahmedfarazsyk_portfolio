@@ -47,7 +47,8 @@ a {
   margin-bottom: 400px;
   position: relative;
   width: 100%;
-  z-index: 1; }
+  z-index: 1;
+ }
   @media (max-width: 991.98px) {
     .unslate_co--site-inner {
       margin-bottom: auto !important; } }
@@ -60,7 +61,7 @@ a {
   left: 0;
   right: 0;
   bottom: 0px;
-  z-index: -1;
+  z-index: 1000; /* positive so links are clickable */
   height: 400px; }
   @media (max-width: 991.98px) {
     .unslate_co--footer {
@@ -417,11 +418,15 @@ a {
   transition: 1s -webkit-transform cubic-bezier(0.23, 1, 0.32, 1);
   -o-transition: 1s transform cubic-bezier(0.23, 1, 0.32, 1);
   transition: 1s transform cubic-bezier(0.23, 1, 0.32, 1);
-  transition: 1s transform cubic-bezier(0.23, 1, 0.32, 1), 1s -webkit-transform cubic-bezier(0.23, 1, 0.32, 1); }
+  transition: 1s transform cubic-bezier(0.23, 1, 0.32, 1), 1s -webkit-transform cubic-bezier(0.23, 1, 0.32, 1);
+  pointer-events: auto;   /* added: re-enable when shown */
+ }
   .offcanvas .unslate_co--site-mobile-menu {
     -webkit-transform: translateX(0%);
     -ms-transform: translateX(0%);
-    transform: translateX(0%); }
+    transform: translateX(0%);
+    pointer-events: auto;   /* added: re-enable when shown */
+ }
   .unslate_co--site-mobile-menu .close-wrap {
     margin-right: 20px;
     position: relative; }
@@ -1491,3 +1496,20 @@ span.error {
     height: 100%;
     border: 1px solid red;
     background: #000; }
+
+
+
+/* Fix for footer links not clickable on mobile */
+.unslate_co--footer {
+  position: relative !important;
+  z-index: 9999 !important; /* bring footer on top */
+}
+
+/* Prevent overlays from blocking clicks */
+.gsap-reveal .cover,
+.blog-item .overlay,
+.lines-wrap,
+.jarallax > .jarallax-img {
+  pointer-events: none;
+}
+
